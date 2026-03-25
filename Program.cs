@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Vi2Converter
 {
@@ -6,27 +7,35 @@ namespace Vi2Converter
     {
         static void Main(string[] args)
         {
-            try 
+            // Usage: .\Vi2Converter.exe "path_to_your_file.vi2"
+            if (args.Length == 0)
+            {
+                Console.WriteLine("Error: Please provide a .vi2 file path.");
+                return;
+            }
+
+            string filePath = args[0];
+
+            try
             {
                 using (var handler = new TestoVi2Handler())
                 {
-                    // 1. Read existing data
-                    Console.WriteLine("Reading data...");
-                    var data = handler.Read("input.vi2");
-                    Console.WriteLine($"Found {data.Count} points.");
+                    Console.WriteLine($"Reading: {filePath}...");
+                    List<MeasurementPoint> data = handler.Read(filePath);
 
-                    // 2. Modify data (optional)
-                    data[0].Timestamp = DateTime.Now; 
-
-                    // 3. Write to a new file
-                    Console.WriteLine("Writing new file...");
-                    handler.Write("output.vi2", data, "MyCustomSession");
-                    Console.WriteLine("Success!");
+                    Console.WriteLine($"--- Data Extracted ({data.Count} points) ---");
+                    foreach (var point in data)
+                    {
+                        // Outputs: [Timestamp]: Value1, Value2...
+                        Console.WriteLine($"{point.Timestamp:yyyy-MM-dd HH:mm:ss}: {string.Join(", ", point.Values)}");
+                    }
+                    Console.WriteLine("--- End of Data ---");
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error: " + (ex.InnerException?.Message ?? ex.Message));
+                // InnerException often contains the real COM error
+                Console.WriteLine("Read Test Failed: " + (ex.InnerException?.Message ?? ex.Message));
             }
         }
     }

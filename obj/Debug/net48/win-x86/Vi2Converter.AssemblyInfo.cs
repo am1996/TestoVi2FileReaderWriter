@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Vi2Converter")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dba6cfd5e275d657d4ce245be54036a5c32aad55")]
 [assembly: System.Reflection.AssemblyProductAttribute("Vi2Converter")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Vi2Converter")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
