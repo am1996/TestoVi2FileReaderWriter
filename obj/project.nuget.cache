@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "Lawp8I1Ambs=",
+  "success": true,
+  "projectFilePath": "G:\\projects\\Vi2Converter\\Vi2Converter.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ahmed.magdyy\\.nuget\\packages\\microsoft.netframework.referenceassemblies\\1.0.3\\microsoft.netframework.referenceassemblies.1.0.3.nupkg.sha512",
+    "C:\\Users\\ahmed.magdyy\\.nuget\\packages\\microsoft.netframework.referenceassemblies.net48\\1.0.3\\microsoft.netframework.referenceassemblies.net48.1.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
