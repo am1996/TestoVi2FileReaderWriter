@@ -23,7 +23,8 @@ Vi2Converter/
 
 ## How It Works
 
-`TestVI2Loader` inside `TestoModellVI2.dll` is an `internal` class, so it cannot be referenced directly. `TestoVi2Handler` uses .NET reflection to load and invoke it at runtime.
+`TestVI2Loader` inside `TestoModellVI2.dll` is an `internal` class, so it cannot be referenced directly. `TestoVi2Handler` uses .NET reflection to load and invoke it at runtime..
+`WriteBinary` is a reconstruct of how to write a working vi2 file.
 
 ### Key Classes
 
@@ -42,7 +43,7 @@ using (var handler = new TestoVi2Handler())
     data[0].Timestamp = DateTime.Now;
 
     // Write
-    handler.Write("output.vi2", data, "MySession");
+    handler.WriteBinary("output.vi2", data, list,startIndex);
 }
 ```
 
@@ -57,7 +58,4 @@ Column 0 is treated as an OA date timestamp; remaining columns become `Values`.
 
 ## Build
 
-Open `Vi2Converter.sln` in Visual Studio and build for **x86 | Debug** (or Release).  
-The project targets **net48** and requires **C# 10** language version.
-
-> The DLLs are not redistributed with this repo. Copy them from your Testo software installation into the project root before building.
+Open `Vi2Converter.sln` in Visual Studio and build for **x86 | Debug** (or Release).
