@@ -49,6 +49,10 @@
               "target": "Package",
               "version": "[1.0.3, )",
               "autoReferenced": true
+            },
+            "OpenMcdf": {
+              "target": "Package",
+              "version": "[2.3.1, )"
             }
           },
           "runtimeIdentifierGraphPath": "C:\\progs\\dotnet\\sdk\\10.0.102\\RuntimeIdentifierGraph.json"

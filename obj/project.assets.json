@@ -13,6 +13,19 @@
         "build": {
           "build/Microsoft.NETFramework.ReferenceAssemblies.net48.targets": {}
         }
+      },
+      "OpenMcdf/2.3.1": {
+        "type": "package",
+        "compile": {
+          "lib/net40/OpenMcdf.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net40/OpenMcdf.dll": {
+            "related": ".xml"
+          }
+        }
       }
     },
     ".NETFramework,Version=v4.8/win-x86": {
@@ -26,6 +39,19 @@
         "type": "package",
         "build": {
           "build/Microsoft.NETFramework.ReferenceAssemblies.net48.targets": {}
+        }
+      },
+      "OpenMcdf/2.3.1": {
+        "type": "package",
+        "compile": {
+          "lib/net40/OpenMcdf.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net40/OpenMcdf.dll": {
+            "related": ".xml"
+          }
         }
       }
     }
@@ -421,11 +447,29 @@
         "microsoft.netframework.referenceassemblies.net48.1.0.3.nupkg.sha512",
         "microsoft.netframework.referenceassemblies.net48.nuspec"
       ]
+    },
+    "OpenMcdf/2.3.1": {
+      "sha512": "2Otbtp5FsIkdtWn4904oftoyOigllM/Auz2V7qIpxNaK+MC1C2ENjNXL3/ZdKWFLOs24/Bi/lYOE254C7s3Pgw==",
+      "type": "package",
+      "path": "openmcdf/2.3.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "icon.png",
+        "lib/net40/OpenMcdf.dll",
+        "lib/net40/OpenMcdf.xml",
+        "lib/netstandard2.0/OpenMcdf.dll",
+        "lib/netstandard2.0/OpenMcdf.xml",
+        "openmcdf.2.3.1.nupkg.sha512",
+        "openmcdf.nuspec"
+      ]
     }
   },
   "projectFileDependencyGroups": {
     ".NETFramework,Version=v4.8": [
-      "Microsoft.NETFramework.ReferenceAssemblies >= 1.0.3"
+      "Microsoft.NETFramework.ReferenceAssemblies >= 1.0.3",
+      "OpenMcdf >= 2.3.1"
     ]
   },
   "packageFolders": {
@@ -476,6 +520,10 @@
             "target": "Package",
             "version": "[1.0.3, )",
             "autoReferenced": true
+          },
+          "OpenMcdf": {
+            "target": "Package",
+            "version": "[2.3.1, )"
           }
         },
         "runtimeIdentifierGraphPath": "C:\\progs\\dotnet\\sdk\\10.0.102\\RuntimeIdentifierGraph.json"

@@ -1,0 +1,15 @@
+G:\projects\Vi2Converter\obj\Debug\net48\Vi2Converter.csproj.AssemblyReference.cache
+G:\projects\Vi2Converter\obj\Debug\net48\Vi2Converter.GeneratedMSBuildEditorConfig.editorconfig
+G:\projects\Vi2Converter\obj\Debug\net48\Vi2Converter.AssemblyInfoInputs.cache
+G:\projects\Vi2Converter\obj\Debug\net48\Vi2Converter.AssemblyInfo.cs
+G:\projects\Vi2Converter\obj\Debug\net48\Vi2Converter.csproj.CoreCompileInputs.cache
+G:\projects\Vi2Converter\obj\Debug\net48\Vi2Converter.sourcelink.json
+G:\projects\Vi2Converter\bin\Debug\net48\Vi2Converter.exe.config
+G:\projects\Vi2Converter\bin\Debug\net48\Vi2Converter.exe
+G:\projects\Vi2Converter\bin\Debug\net48\Vi2Converter.pdb
+G:\projects\Vi2Converter\bin\Debug\net48\Interop.Tcddka.dll
+G:\projects\Vi2Converter\bin\Debug\net48\TestoModellVI2.dll
+G:\projects\Vi2Converter\obj\Debug\net48\Vi2Conve.B4ECCAA4.Up2Date
+G:\projects\Vi2Converter\obj\Debug\net48\Vi2Converter.exe
+G:\projects\Vi2Converter\obj\Debug\net48\Vi2Converter.pdb
+G:\projects\Vi2Converter\bin\Debug\net48\OpenMcdf.dll

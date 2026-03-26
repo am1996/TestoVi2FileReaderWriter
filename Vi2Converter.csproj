@@ -24,4 +24,7 @@
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="OpenMcdf" Version="2.3.1" />
+  </ItemGroup>
 </Project>

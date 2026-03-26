@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.IO;
 
 namespace Vi2Converter
 {
@@ -7,35 +10,66 @@ namespace Vi2Converter
     {
         static void Main(string[] args)
         {
-            // Usage: .\Vi2Converter.exe "path_to_your_file.vi2"
-            if (args.Length == 0)
+            if (args.Length < 3)
             {
-                Console.WriteLine("Error: Please provide a .vi2 file path.");
+                Console.WriteLine("Usage: Vi2Processor.exe <start_dt> <end_dt> <file.vi2>");
                 return;
             }
 
-            string filePath = args[0];
+            string startStr = args[0]; // e.g., "2026-03-16 09:00:00"
+            string endStr = args[1];
+            string inputFile = args[2];
+            string format = "yyyy-MM-dd HH:mm:ss";
 
             try
             {
+                DateTime targetStart = DateTime.ParseExact(startStr, format, CultureInfo.InvariantCulture);
+                DateTime targetEnd = DateTime.ParseExact(endStr, format, CultureInfo.InvariantCulture);
+
                 using (var handler = new TestoVi2Handler())
                 {
-                    Console.WriteLine($"Reading: {filePath}...");
-                    List<MeasurementPoint> data = handler.Read(filePath);
+                    Console.WriteLine("[*] Reading Original File...");
+                    List<MeasurementPoint> allPoints = handler.Read(inputFile);
 
-                    Console.WriteLine($"--- Data Extracted ({data.Count} points) ---");
-                    foreach (var point in data)
+                    // --- THE TIMEZONE FIX ---
+                    // The CSV shows 7:00 when you want 9:00. 
+                    // This means we need to find the point that is 2 hours BEFORE your target.
+                    TimeSpan localOffset = TimeZoneInfo.Local.GetUtcOffset(targetStart);
+                    DateTime utcSearchStart = targetStart.Subtract(localOffset);
+                    DateTime utcSearchEnd = targetEnd.Subtract(localOffset);
+
+                    Console.WriteLine($"[!] Applying Timezone Correction: -{localOffset.TotalHours} hours");
+                    Console.WriteLine($"[!] Searching for Raw UTC Time: {utcSearchStart}");
+
+                    // Find the index of the point that corresponds to the UTC time
+                    var firstMatch = allPoints.FirstOrDefault(p => p.Timestamp >= utcSearchStart);
+                    if (firstMatch == null) 
                     {
-                        // Outputs: [Timestamp]: Value1, Value2...
-                        Console.WriteLine($"{point.Timestamp:yyyy-MM-dd HH:mm:ss}: {string.Join(", ", point.Values)}");
+                        Console.WriteLine("[-] Could not find the requested range in the file.");
+                        return;
                     }
-                    Console.WriteLine("--- End of Data ---");
+
+                    int startIndex = allPoints.IndexOf(firstMatch);
+                    var filteredData = allPoints
+                        .Where(p => p.Timestamp >= utcSearchStart && p.Timestamp <= utcSearchEnd)
+                        .ToList();
+
+                    // --- GENERATE FILES ---
+                    string filteredVi2 = "Filtered_" + Path.GetFileName(inputFile);
+                    
+                    Console.WriteLine($"[*] Writing Filtered Binary at Index: {startIndex}");
+                    handler.WriteBinary(inputFile, filteredVi2, filteredData, startIndex);
+
+                    // Optional Debug CSVs
+                    handler.ExportToCsv("Debug_Filtered.csv", filteredData);
+
+                    Console.WriteLine($"\n[SUCCESS] Start point (UTC {utcSearchStart}) mapped to Index {startIndex}.");
+                    Console.WriteLine($"[SUCCESS] Software should now show local start as: {targetStart}");
                 }
             }
             catch (Exception ex)
             {
-                // InnerException often contains the real COM error
-                Console.WriteLine("Read Test Failed: " + (ex.InnerException?.Message ?? ex.Message));
+                Console.WriteLine("\n[ERROR] " + ex.Message);
             }
         }
     }
